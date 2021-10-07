@@ -10,8 +10,8 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import Main from "./Main";
 import NavBar from "./NavBar";
 import itemsService from "../services/Items.services";
-import Items from "./Items";
-
+// import Items from "./Items";
+import BasicTable from "./ItemsTable"
 
 const Dashboard = () => {
   const { path } = useRouteMatch();
@@ -80,7 +80,8 @@ const Dashboard = () => {
               style={{ textAlign: "center", color: "orange" }}
             >
               Items
-              <Items itemsData={itemsData}></Items>
+              <BasicTable itemsData={itemsData}></BasicTable>
+              {/* <Items itemsData={itemsData}></Items> */}
             </Typography>
           )}
           path={`${path}/items`}
