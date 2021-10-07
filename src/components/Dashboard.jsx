@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
+  // Button,
   Typography
 } from "@mui/material";
 // eslint-disable-next-line no-unused-vars
@@ -10,14 +10,12 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import Main from "./Main";
 import NavBar from "./NavBar";
 import itemsService from "../services/Items.services";
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-
+import Items from "./Items";
 
 
 const Dashboard = () => {
   const { path } = useRouteMatch();
   const [itemsData, setItemsData] = useState(false);
-  const rows = [];
 
   useEffect(() => {
     // Recuperar informacion de persona loggeada desde endpoint
@@ -32,37 +30,15 @@ const Dashboard = () => {
       const result = await itemsService(hardCodedJWT);
       console.log("getInfoUser result", result);
       setItemsData({ data: result })
-      console.log(itemsData.data)
-      result.forEach(element => {
-        rows.push(createData(element))
-        console.log(element)
-      });
+      console.log("itemsData.data --> ", itemsData.data)
+      // itemsData.data.forEach(element => {
+      //   console.log(element)
+      // });
     } catch (error) {
       console.log("error al recuperar info", error);
     }
   };
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.getValue(params.id, 'firstName') || ''} ${
-          params.getValue(params.id, 'lastName') || ''
-        }`,
-    },
-  ];
+
   return (
     <>
       <NavBar />
@@ -104,15 +80,7 @@ const Dashboard = () => {
               style={{ textAlign: "center", color: "orange" }}
             >
               Items
-              <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+              <Items itemsData={itemsData}></Items>
             </Typography>
           )}
           path={`${path}/items`}
