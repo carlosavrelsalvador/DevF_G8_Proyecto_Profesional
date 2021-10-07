@@ -11,7 +11,8 @@ import Main from "./Main";
 import NavBar from "./NavBar";
 import itemsService from "../services/Items.services";
 // import Items from "./Items";
-import BasicTable from "./ItemsTable"
+// import BasicTable from "./ItemsTable"
+import EnhancedTableToolbar from "./ItemsTableSort"
 
 const Dashboard = () => {
   const { path } = useRouteMatch();
@@ -79,8 +80,8 @@ const Dashboard = () => {
               variant="h6"
               style={{ textAlign: "center", color: "orange" }}
             >
-              Items
-              <BasicTable itemsData={itemsData}></BasicTable>
+              <EnhancedTableToolbar itemsData={itemsData}> </EnhancedTableToolbar>
+              {/* <BasicTable itemsData={itemsData}></BasicTable>*/}
               {/* <Items itemsData={itemsData}></Items> */}
             </Typography>
           )}

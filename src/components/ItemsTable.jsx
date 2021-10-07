@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
+// Basic table
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
